@@ -404,7 +404,7 @@ docs = [
 [package.metadata]
 requires-dist = [
     { name = "coola", specifier = ">=0.9.1,<1.0" },
-    { name = "packaging", specifier = ">=21.0,<26.0" },
+    { name = "packaging", specifier = ">=23.0,<26.0" },
     { name = "requests", specifier = ">=2.30.0,<3.0" },
 ]
 
