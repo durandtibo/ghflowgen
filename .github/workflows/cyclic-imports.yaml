@@ -36,10 +36,14 @@ jobs:
         run: |
           inv show-installed-packages
 
-      - name: check votingsys
+      - name: check flowforge
         run: |
-          python -c "import votingsys"
+          python -c "import flowforge"
 
-      - name: check votingsys.utils
+      - name: check flowforge.utils
         run: |
-          python -c "from votingsys import utils"
+          python -c "from flowforge import utils"
+
+      - name: check flowforge.version
+        run: |
+          python -c "from flowforge import version"
