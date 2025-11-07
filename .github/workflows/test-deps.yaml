@@ -38,7 +38,7 @@ jobs:
           inv install --all-deps
 
       - name: Install valid package version
-        uses: durandtibo/uv-install-package-action@v0.1.0
+        uses: durandtibo/uv-install-package-action@v0.1.1
         with:
           package-name: 'coola'
           package-version: ${{ matrix.package-version }}
@@ -93,7 +93,7 @@ jobs:
           inv install --all-deps
 
       - name: Install valid package version
-        uses: durandtibo/uv-install-package-action@v0.1.0
+        uses: durandtibo/uv-install-package-action@v0.1.1
         with:
           package-name: 'packaging'
           package-version: ${{ matrix.package-version }}
@@ -146,7 +146,7 @@ jobs:
           inv install --all-deps
 
       - name: Install valid package version
-        uses: durandtibo/uv-install-package-action@v0.1.0
+        uses: durandtibo/uv-install-package-action@v0.1.1
         with:
           package-name: 'requests'
           package-version: ${{ matrix.package-version }}
