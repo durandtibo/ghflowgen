@@ -4,6 +4,7 @@ from flowforge.version import (
     filter_stable_versions,
     filter_valid_versions,
     latest_major_versions,
+    latest_minor_versions,
 )
 
 ############################################
@@ -145,3 +146,39 @@ def test_latest_major_versions_missing_version() -> None:
 
 def test_latest_major_versions_empty() -> None:
     assert latest_major_versions([]) == []
+
+
+###########################################
+#     Tests for latest_minor_versions     #
+###########################################
+
+
+def test_latest_minor_versions() -> None:
+    assert latest_minor_versions(["1.0.0", "1.0.1", "1.1.0", "1.1.2", "2.0.0", "2.0.3"]) == [
+        "1.0.1",
+        "1.1.2",
+        "2.0.3",
+    ]
+
+
+def test_latest_minor_versions_sort() -> None:
+    assert latest_minor_versions(["2.0.3", "1.0.0", "1.0.1", "1.1.2", "1.1.0", "2.0.0"]) == [
+        "1.0.1",
+        "1.1.2",
+        "2.0.3",
+    ]
+
+
+def test_latest_minor_versions_missing_version() -> None:
+    assert latest_minor_versions(
+        ["1.0.0", "1.1.0", "1.1.1", "1.2.0", "1.2.1", "1.2.2", "1.4.1"]
+    ) == [
+        "1.0.0",
+        "1.1.1",
+        "1.2.2",
+        "1.4.1",
+    ]
+
+
+def test_latest_minor_versions_empty() -> None:
+    assert latest_minor_versions([]) == []
