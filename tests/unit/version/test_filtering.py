@@ -1,6 +1,10 @@
 from __future__ import annotations
 
-from flowforge.version import filter_stable_versions, filter_valid_versions
+from flowforge.version import (
+    filter_stable_versions,
+    filter_valid_versions,
+    latest_major_versions,
+)
 
 ############################################
 #     Tests for filter_stable_versions     #
@@ -109,3 +113,35 @@ def test_filter_valid_versions_mixed() -> None:
 
 def test_filter_valid_versions_empty() -> None:
     assert filter_valid_versions([]) == []
+
+
+###########################################
+#     Tests for latest_major_versions     #
+###########################################
+
+
+def test_latest_major_versions() -> None:
+    assert latest_major_versions(["1.0.0", "1.1.0", "1.2.0", "1.2.1", "2.0.0"]) == [
+        "1.2.1",
+        "2.0.0",
+    ]
+
+
+def test_latest_major_versions_sort() -> None:
+    assert latest_major_versions(["1.0.0", "1.2.1", "2.0.0", "1.1.0", "1.2.0"]) == [
+        "1.2.1",
+        "2.0.0",
+    ]
+
+
+def test_latest_major_versions_missing_version() -> None:
+    assert latest_major_versions(["1.0.0", "2.0.0", "3.0", "5"]) == [
+        "1.0.0",
+        "2.0.0",
+        "3.0",
+        "5",
+    ]
+
+
+def test_latest_major_versions_empty() -> None:
+    assert latest_major_versions([]) == []
