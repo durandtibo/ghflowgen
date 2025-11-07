@@ -112,7 +112,6 @@ jobs:
           inv unit-test
 
 
-
   requests:
     runs-on: ${{ matrix.os }}
     timeout-minutes: 10
