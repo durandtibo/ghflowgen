@@ -28,7 +28,7 @@ requires-python = ">=3.10"
 
 dependencies = [
     "coola >=0.9.1,<1.0",
-    "feu[requests] >=0.4.2,<1.0",
+    "requests >=2.30.0,<3.0",
 ]
 
 [project.optional-dependencies]

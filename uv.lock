@@ -360,9 +360,6 @@ cli = [
 git = [
     { name = "gitpython" },
 ]
-requests = [
-    { name = "requests" },
-]
 
 [[package]]
 name = "filelock"
@@ -379,7 +376,7 @@ version = "0.0.1a0"
 source = { editable = "." }
 dependencies = [
     { name = "coola" },
-    { name = "feu", extra = ["requests"] },
+    { name = "requests" },
 ]
 
 [package.dev-dependencies]
@@ -406,7 +403,7 @@ docs = [
 [package.metadata]
 requires-dist = [
     { name = "coola", specifier = ">=0.9.1,<1.0" },
-    { name = "feu", extras = ["requests"], specifier = ">=0.4.2,<1.0" },
+    { name = "requests", specifier = ">=2.30.0,<3.0" },
 ]
 
 [package.metadata.requires-dev]
