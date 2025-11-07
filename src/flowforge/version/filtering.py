@@ -2,7 +2,12 @@ r"""Contain functions to manage package versions."""
 
 from __future__ import annotations
 
-__all__ = ["filter_stable_versions", "filter_valid_versions"]
+__all__ = [
+    "filter_stable_versions",
+    "filter_valid_versions",
+    "latest_major_versions",
+    "latest_minor_versions",
+]
 
 from contextlib import suppress
 from typing import TYPE_CHECKING
@@ -91,3 +96,77 @@ def filter_valid_versions(versions: Sequence[str]) -> list[str]:
             Version(v)
             valid_versions.append(v)
     return valid_versions
+
+
+def latest_major_versions(versions: Sequence[str]) -> list[str]:
+    r"""Return the latest version for each major version in a list of
+    semantic versions.
+
+    This function takes a list of semantic version strings
+    (e.g. "1.0.0", "1.2.1", "2.0.0"), groups them by their major
+    version number, and returns only the latest version from
+    each major group (based on minor and patch numbers).
+
+    Args:
+        versions: A list of version strings in semantic version format.
+
+    Returns:
+        A list containing the latest version for each major version,
+            sorted by major version number.
+
+    Example usage:
+
+    ```pycon
+
+    >>> from flowforge.version import latest_major_versions
+    >>> versions = latest_major_versions(["1.0.0", "1.1.0", "1.2.0", "1.2.1", "2.0.0"])
+    >>> versions
+    ['1.2.1', '2.0.0']
+
+    ```
+    """
+    by_major = {}
+    for v_str in versions:
+        v = Version(v_str)
+        current = by_major.get(v.major)
+        if current is None or v > current:
+            by_major[v.major] = v
+    return [str(by_major[k]) for k in sorted(by_major)]
+
+
+def latest_minor_versions(versions: Sequence[str]) -> list[str]:
+    """Return the latest version for each minor version in a list of
+    semantic versions.
+
+    This function takes a list of semantic version strings
+    (e.g. "1.0.0", "1.0.1", "1.1.0", "2.0.0"), groups them by their
+    major and minor version numbers, and returns only the latest
+    version from each minor group (based on the patch number).
+
+    Args:
+        versions: A list of version strings in semantic version format.
+
+    Returns:
+        A list containing the latest version for each minor version,
+            sorted by major and minor version numbers.
+
+
+    Example usage:
+
+    ```pycon
+
+    >>> from flowforge.version import latest_major_versions
+    >>> versions = latest_minor_versions(["1.0.0", "1.0.1", "1.1.0", "1.1.2", "2.0.0", "2.0.3"])
+    >>> versions
+    ['1.0.1', '1.1.2', '2.0.3']
+
+    ```
+    """
+    by_minor = {}
+    for v_str in versions:
+        v = Version(v_str)
+        key = (v.major, v.minor)
+        current = by_minor.get(key)
+        if current is None or v > current:
+            by_minor[key] = v
+    return [str(by_minor[k]) for k in sorted(by_minor)]
