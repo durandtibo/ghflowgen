@@ -1,11 +1,47 @@
 from __future__ import annotations
 
 from flowforge.version import (
+    filter_range_versions,
     filter_stable_versions,
     filter_valid_versions,
     latest_major_versions,
     latest_minor_versions,
 )
+
+###########################################
+#     Tests for filter_range_versions     #
+###########################################
+
+
+def test_filter_range_versions() -> None:
+    assert filter_range_versions(
+        ["0.9.0", "1.0.0", "1.2.0", "1.3.0", "2.0.0"], lower="1.1.0", upper="2.0.0"
+    ) == [
+        "1.2.0",
+        "1.3.0",
+    ]
+
+
+def test_filter_range_versions_lower() -> None:
+    assert filter_range_versions(["0.9.0", "1.0.0", "1.2.0", "1.3.0", "2.0.0"], lower="1.1.0") == [
+        "1.2.0",
+        "1.3.0",
+        "2.0.0",
+    ]
+
+
+def test_filter_range_versions_upper() -> None:
+    assert filter_range_versions(["0.9.0", "1.0.0", "1.2.0", "1.3.0", "2.0.0"], upper="2.0.0") == [
+        "0.9.0",
+        "1.0.0",
+        "1.2.0",
+        "1.3.0",
+    ]
+
+
+def test_filter_range_versions_empty() -> None:
+    assert filter_range_versions([]) == []
+
 
 ############################################
 #     Tests for filter_stable_versions     #
