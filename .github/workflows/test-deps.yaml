@@ -18,7 +18,7 @@ jobs:
       - name: Read versions
         id: extract
         run: |
-          echo "versions=$(cat assets/versions.json)" >> $GITHUB_OUTPUT
+          echo "versions=$(cat assets/package_versions.json)" >> $GITHUB_OUTPUT
 
       - name: Show versions
         run: |
