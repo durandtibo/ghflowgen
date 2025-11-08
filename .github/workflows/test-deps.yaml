@@ -62,7 +62,7 @@ jobs:
 
 
   requests:
-    needs: versions.versions
+    needs: versions
     runs-on: ${{ matrix.os }}
     timeout-minutes: 10
     strategy:
