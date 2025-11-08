@@ -53,4 +53,101 @@
     <br/>
 </p>
 
-Python library to generate GitHub action workflows
+## Overview
+
+`ghflowgen` is an experimental Python library that provides functionalities to manage GitHub action
+workflows.
+
+- [Motivation](#motivation)
+- [Documentation](https://durandtibo.github.io/ghflowgen/)
+- [Installation](#installation)
+- [Contributing](#contributing)
+- [API stability](#api-stability)
+- [License](#license)
+
+## Documentation
+
+- [latest (stable)](https://durandtibo.github.io/ghflowgen/): documentation from the latest stable
+  release.
+- [main (unstable)](https://durandtibo.github.io/ghflowgen/main/): documentation associated to the
+  main
+  branch of the repo. This documentation may contain a lot of work-in-progress/outdated/missing
+  parts.
+
+## Installation
+
+We highly recommend installing
+a [virtual environment](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/).
+You can install `ghflowgen` using either `pip` (standard Python installer) or `uv` (a faster, modern
+alternative).
+
+### Using `pip`
+
+The following command will automatically download and install the latest version of the package from
+PyPI , along with all required dependencies.
+
+```shell
+pip install ghflowgen
+```
+
+To make the package as slim as possible, only the minimal packages required to use `ghflowgen` are
+installed.
+To include all the dependencies, you can use the following command:
+
+```shell
+pip install ghflowgen[all]
+```
+
+### Using `uv`
+
+The following command will automatically download and install the latest version of the package from
+PyPI , along with all required dependencies.
+
+```shell
+uv pip install ghflowgen
+```
+
+To make the package as slim as possible, only the minimal packages required to use `ghflowgen` are
+installed.
+To include all the dependencies, you can use the following command:
+
+```shell
+uv pip install ghflowgen[all]
+```
+
+Please check the [get started page](https://durandtibo.github.io/ghflowgen/get_started) to see how
+to
+install only some specific dependencies or other alternatives to install the library.
+The following is the corresponding `ghflowgen` versions and tested dependencies.
+
+| `ghflowgen` | `packaging`    | `requests`      | `python`       |
+|-------------|----------------|-----------------|----------------|
+| `main`      | `>=23.0,<26.0` | `>=2.30.0,<3.0` | `>=3.10,<3.15` |
+
+<sup>*</sup> indicates an optional dependency
+
+## Contributing
+
+Please check the instructions in [CONTRIBUTING.md](.github/CONTRIBUTING.md).
+
+## Suggestions and Communication
+
+Everyone is welcome to contribute to the community.
+If you have any questions or suggestions, you can
+submit [Github Issues](https://github.com/durandtibo/ghflowgen/issues).
+We will reply to you as soon as possible. Thank you very much.
+
+## API stability
+
+:warning: While `ghflowgen` is in development stage, no API is guaranteed to be stable from one
+release to the next.
+In fact, it is very likely that the API will change multiple times before a stable 1.0.0 release.
+In practice, this means that upgrading `ghflowgen` to a new version will possibly break any code
+that
+was using the old version of `ghflowgen`.
+
+## License
+
+`ghflowgen` is licensed under BSD 3-Clause "New" or "Revised" license available
+in [LICENSE](LICENSE)
+file.
