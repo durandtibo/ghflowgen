@@ -27,7 +27,6 @@ def get_package_versions() -> dict[str, list[str]]:
 
 def main() -> None:
     logger.info(get_package_versions())
-    logger.info(json.dumps(get_package_versions()))
 
 
 if __name__ == "__main__":
