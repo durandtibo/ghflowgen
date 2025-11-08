@@ -11,6 +11,7 @@ __all__ = [
     "get_latest_minor_versions",
     "get_package_version",
     "get_python_major_minor",
+    "get_versions",
     "latest_major_versions",
     "latest_minor_versions",
 ]
@@ -26,5 +27,6 @@ from flowforge.version.filtering import (
 from flowforge.version.package import (
     get_latest_major_versions,
     get_latest_minor_versions,
+    get_versions,
 )
 from flowforge.version.runtime import get_package_version, get_python_major_minor
