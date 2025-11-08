@@ -4,6 +4,7 @@ from __future__ import annotations
 
 __all__ = [
     "compare_version",
+    "filter_range_versions",
     "filter_stable_versions",
     "filter_valid_versions",
     "get_package_version",
@@ -14,6 +15,7 @@ __all__ = [
 
 from flowforge.version.comparison import compare_version
 from flowforge.version.filtering import (
+    filter_range_versions,
     filter_stable_versions,
     filter_valid_versions,
     latest_major_versions,

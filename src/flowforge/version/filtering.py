@@ -3,6 +3,7 @@ r"""Contain functions to manage package versions."""
 from __future__ import annotations
 
 __all__ = [
+    "filter_range_versions",
     "filter_stable_versions",
     "filter_valid_versions",
     "latest_major_versions",
@@ -16,6 +17,49 @@ from packaging.version import InvalidVersion, Version
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
+
+
+def filter_range_versions(
+    versions: Sequence[str], lower: str | None = None, upper: str | None = None
+) -> list[str]:
+    """Filter a list of version strings to include only versions within
+    optional bounds.
+
+    Args:
+        versions: A list of version strings.
+        lower: The lower version bound (inclusive).
+            If ``None``, no lower limit is applied.
+        upper: The upper version bound (exclusive).
+            If None, no upper limit is applied.
+
+    Returns:
+        A list of version strings that fall within the specified bounds.
+
+    Example usage:
+
+    ```pycon
+
+    >>> from flowforge.version import filter_range_versions
+    >>> versions = filter_range_versions(
+    ...     ["1.0.0", "1.2.0", "1.3.0", "2.0.0"], lower="1.1.0", upper="2.0.0"
+    ... )
+    >>> versions
+    ['1.2.0', '1.3.0']
+    >>> versions = filter_range_versions(["0.9.0", "1.0.0", "1.1.0"], lower="1.0.0")
+    >>> versions
+    ['1.0.0', '1.1.0']
+
+    ```
+    """
+    lower_v = Version(lower) if lower else None
+    upper_v = Version(upper) if upper else None
+
+    result = []
+    for v_str in versions:
+        v = Version(v_str)
+        if (lower_v is None or v >= lower_v) and (upper_v is None or v < upper_v):
+            result.append(v_str)
+    return result
 
 
 def filter_stable_versions(versions: Sequence[str]) -> list[str]:
