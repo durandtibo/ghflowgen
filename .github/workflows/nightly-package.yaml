@@ -176,7 +176,7 @@ jobs:
 
 
   packaging:
-    needs: versions
+    needs: get-versions
     runs-on: ${{ matrix.os }}
     timeout-minutes: 10
     strategy:
@@ -214,7 +214,7 @@ jobs:
 
 
   requests:
-    needs: versions
+    needs: get-versions
     runs-on: ${{ matrix.os }}
     timeout-minutes: 10
     strategy:
