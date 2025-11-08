@@ -3,7 +3,7 @@ from __future__ import annotations
 import pytest
 from packaging.version import Version
 
-from flowforge.version import get_package_version, get_python_major_minor
+from ghflowgen.version import get_package_version, get_python_major_minor
 
 
 @pytest.fixture(autouse=True)

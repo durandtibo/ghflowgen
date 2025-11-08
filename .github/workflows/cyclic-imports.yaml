@@ -36,14 +36,14 @@ jobs:
         run: |
           inv show-installed-packages
 
-      - name: check flowforge
+      - name: check ghflowgen
         run: |
-          python -c "import flowforge"
+          python -c "import ghflowgen"
 
-      - name: check flowforge.utils
+      - name: check ghflowgen.utils
         run: |
-          python -c "from flowforge import utils"
+          python -c "from ghflowgen import utils"
 
-      - name: check flowforge.version
+      - name: check ghflowgen.version
         run: |
-          python -c "from flowforge import version"
+          python -c "from ghflowgen import version"

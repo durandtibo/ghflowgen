@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from flowforge.version import (
+from ghflowgen.version import (
     filter_range_versions,
     filter_stable_versions,
     filter_valid_versions,

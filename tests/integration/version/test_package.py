@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import pytest
 
-from flowforge.version import (
+from ghflowgen.version import (
     get_latest_major_versions,
     get_latest_minor_versions,
     get_versions,

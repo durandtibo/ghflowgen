@@ -24,7 +24,7 @@ def get_package_version(package: str) -> Version | None:
 
     ```pycon
 
-    >>> from flowforge.version import get_package_version
+    >>> from ghflowgen.version import get_package_version
     >>> get_package_version("pytest")
     <Version('...')>
 
@@ -47,7 +47,7 @@ def get_python_major_minor() -> str:
 
     ```pycon
 
-    >>> from flowforge.version import get_python_major_minor
+    >>> from ghflowgen.version import get_python_major_minor
     >>> get_python_major_minor()  # doctest: +SKIP
 
     ```

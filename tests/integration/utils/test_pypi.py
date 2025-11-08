@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import pytest
 
-from flowforge.utils.pypi import get_pypi_versions
+from ghflowgen.utils.pypi import get_pypi_versions
 
 
 @pytest.fixture(autouse=True)

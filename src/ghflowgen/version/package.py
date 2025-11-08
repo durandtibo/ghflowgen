@@ -6,8 +6,8 @@ __all__ = ["get_latest_major_versions", "get_latest_minor_versions", "get_versio
 
 from functools import lru_cache
 
-from flowforge.utils.pypi import get_pypi_versions
-from flowforge.version.filtering import (
+from ghflowgen.utils.pypi import get_pypi_versions
+from ghflowgen.version.filtering import (
     filter_range_versions,
     filter_stable_versions,
     filter_valid_versions,
@@ -36,7 +36,7 @@ def get_versions(
 
     ```pycon
 
-    >>> from flowforge.version import get_versions
+    >>> from ghflowgen.version import get_versions
     >>> versions = get_versions("requests")  # doctest: +SKIP
 
     ```
@@ -69,7 +69,7 @@ def get_latest_major_versions(
 
     ```pycon
 
-    >>> from flowforge.version import get_latest_major_versions
+    >>> from ghflowgen.version import get_latest_major_versions
     >>> versions = get_latest_major_versions("requests")  # doctest: +SKIP
 
     ```
@@ -100,7 +100,7 @@ def get_latest_minor_versions(
 
     ```pycon
 
-    >>> from flowforge.version import get_latest_minor_versions
+    >>> from ghflowgen.version import get_latest_minor_versions
     >>> versions = get_latest_minor_versions("requests")  # doctest: +SKIP
 
     ```
