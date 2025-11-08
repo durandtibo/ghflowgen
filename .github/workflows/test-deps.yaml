@@ -8,7 +8,7 @@ permissions:
 
 jobs:
   get-versions:
-    uses: ./.github/workflows/get-get-versions.yaml
+    uses: ./.github/workflows/get-versions.yaml
 
 
   packaging:
