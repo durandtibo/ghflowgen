@@ -2,13 +2,48 @@ from __future__ import annotations
 
 import pytest
 
-from flowforge.version import get_latest_major_versions, get_latest_minor_versions
+from flowforge.version import (
+    get_latest_major_versions,
+    get_latest_minor_versions,
+    get_versions,
+)
 
 
 @pytest.fixture(autouse=True)
 def _reset_cache() -> None:
+    get_versions.cache_clear()
     get_latest_major_versions.cache_clear()
     get_latest_minor_versions.cache_clear()
+
+
+##################################
+#     Tests for get_versions     #
+##################################
+
+
+def test_get_versions_requests() -> None:
+    assert get_versions("requests", lower="2.25", upper="2.30") == (
+        "2.29.0",
+        "2.28.2",
+        "2.28.1",
+        "2.28.0",
+        "2.27.1",
+        "2.27.0",
+        "2.26.0",
+        "2.25.1",
+        "2.25.0",
+    )
+
+
+def test_get_versions_torch() -> None:
+    assert get_versions("torch", lower="2.5", upper="2.9") == (
+        "2.8.0",
+        "2.7.1",
+        "2.7.0",
+        "2.6.0",
+        "2.5.1",
+        "2.5.0",
+    )
 
 
 ###############################################

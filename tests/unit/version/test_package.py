@@ -4,13 +4,47 @@ from unittest.mock import Mock, patch
 
 import pytest
 
-from flowforge.version import get_latest_major_versions, get_latest_minor_versions
+from flowforge.version import (
+    get_latest_major_versions,
+    get_latest_minor_versions,
+    get_versions,
+)
 
 
 @pytest.fixture(autouse=True)
 def _reset_cache() -> None:
+    get_versions.cache_clear()
     get_latest_major_versions.cache_clear()
     get_latest_minor_versions.cache_clear()
+
+
+##################################
+#     Tests for get_versions     #
+##################################
+
+
+def test_get_versions() -> None:
+    mock = Mock(return_value=("1.0.0", "1.0.1", "1.1.0", "1.1.2", "2.0.0", "2.0.3"))
+    with patch("flowforge.version.package.get_pypi_versions", mock):
+        assert get_versions("my_package") == ("1.0.0", "1.0.1", "1.1.0", "1.1.2", "2.0.0", "2.0.3")
+
+
+def test_get_versions_lower() -> None:
+    mock = Mock(return_value=("1.0.0", "1.0.1", "1.1.0", "1.1.2", "2.0.0", "2.0.3"))
+    with patch("flowforge.version.package.get_pypi_versions", mock):
+        assert get_versions("my_package", lower="1.1.0") == ("1.1.0", "1.1.2", "2.0.0", "2.0.3")
+
+
+def test_get_versions_upper() -> None:
+    mock = Mock(return_value=("1.0.0", "1.0.1", "1.1.0", "1.1.2", "2.0.0", "2.0.3"))
+    with patch("flowforge.version.package.get_pypi_versions", mock):
+        assert get_versions("my_package", upper="2.0.0") == ("1.0.0", "1.0.1", "1.1.0", "1.1.2")
+
+
+def test_get_versions_range() -> None:
+    mock = Mock(return_value=("1.0.0", "1.0.1", "1.1.0", "1.1.2", "2.0.0", "2.0.3"))
+    with patch("flowforge.version.package.get_pypi_versions", mock):
+        assert get_versions("my_package", lower="1.1.0", upper="2.0.0") == ("1.1.0", "1.1.2")
 
 
 ###############################################
