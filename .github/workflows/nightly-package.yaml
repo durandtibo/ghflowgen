@@ -9,22 +9,7 @@ permissions:
 
 jobs:
   get-versions:
-    runs-on: ubuntu-latest
-    outputs:
-      package_versions: ${{ steps.extract.outputs.versions }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v5
-
-      - name: Read versions
-        id: extract
-        run: |
-          echo "versions=$(cat assets/package_versions.json)" >> $GITHUB_OUTPUT
-
-      - name: Show versions
-        run: |
-          echo "versions: ${{ toJson(fromJson(steps.extract.outputs.versions)) }}"
-
+    uses: ./.github/workflows/get-versions.yaml
 
   cyclic-imports:
     uses: ./.github/workflows/cyclic-imports.yaml
