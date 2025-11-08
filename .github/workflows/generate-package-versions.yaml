@@ -10,7 +10,7 @@ permissions:
   pull-requests: write
 
 jobs:
-  update-deps:
+  generate-package-versions:
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
@@ -39,7 +39,7 @@ jobs:
         run: |
           inv show-installed-packages
 
-      - name: Run unit tests
+      - name: Generate package versions
         run: |
           python dev/generate_versions.py
 
