@@ -1,0 +1,49 @@
+r"""Contain functions to manage package versions."""
+
+from __future__ import annotations
+
+__all__ = ["get_latest_major_versions"]
+
+from functools import lru_cache
+
+from flowforge.utils.pypi import get_pypi_versions
+from flowforge.version.filtering import (
+    filter_range_versions,
+    filter_stable_versions,
+    filter_valid_versions,
+    latest_major_versions,
+)
+
+
+@lru_cache
+def get_latest_major_versions(
+    package: str, lower: str | None = None, upper: str | None = None
+) -> tuple[str, ...]:
+    r"""Get the latest version for each major version for a given
+    package.
+
+    Args:
+        package: The package name.
+        lower: The lower version bound (inclusive).
+            If ``None``, no lower limit is applied.
+        upper: The upper version bound (exclusive).
+            If None, no upper limit is applied.
+
+    Returns:
+        A tuple containing the latest version for each major version,
+            sorted by major version number.
+
+    Example usage:
+
+    ```pycon
+
+    >>> from flowforge.version import get_latest_major_versions
+    >>> versions = get_latest_major_versions("requests")  # doctest: +SKIP
+
+    ```
+    """
+    versions = get_pypi_versions(package)
+    versions = filter_valid_versions(versions)
+    versions = filter_stable_versions(versions)
+    versions = filter_range_versions(versions, lower=lower, upper=upper)
+    return tuple(latest_major_versions(versions))
