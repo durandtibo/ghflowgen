@@ -1,13 +1,17 @@
 name: Get Versions
 on:
   workflow_call:
+    outputs:
+      package_versions:
+        description: "JSON string containing all package versions"
+        value: ${{ jobs.get-versions.outputs.package_versions }}
   workflow_dispatch:  # to trigger manually
 
 permissions:
   contents: read
 
 jobs:
-  versions:
+  get-versions:
     runs-on: ubuntu-latest
     timeout-minutes: 2
     outputs:
