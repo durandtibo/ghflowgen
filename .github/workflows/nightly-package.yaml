@@ -1,0 +1,265 @@
+name: Test - Dependencies
+on:
+  workflow_call:
+  workflow_dispatch:  # to trigger manually
+
+permissions:
+  contents: read
+
+jobs:
+  get-versions:
+    runs-on: ubuntu-latest
+    outputs:
+      package_versions: ${{ steps.extract.outputs.versions }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Read versions
+        id: extract
+        run: |
+          echo "versions=$(cat assets/package_versions.json)" >> $GITHUB_OUTPUT
+
+      - name: Show versions
+        run: |
+          echo "versions: ${{ toJson(fromJson(steps.extract.outputs.versions)) }}"
+
+
+  cyclic-imports:
+    uses: ./.github/workflows/cyclic-imports.yaml
+
+
+  stable-all:
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    strategy:
+      max-parallel: 8
+      fail-fast: false
+      matrix:
+        os: [
+          ubuntu-latest,
+          ubuntu-24.04,
+          ubuntu-22.04,
+          ubuntu-24.04-arm,
+          ubuntu-22.04-arm,
+          macos-latest,
+          macos-26,
+          macos-15,
+          macos-14,
+          macos-15-intel,
+        ]
+        python-version: [ '3.14', '3.13', '3.12', '3.11', '3.10' ]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Install uv and set the python version
+        uses: astral-sh/setup-uv@v7
+        with:
+          python-version: ${{ matrix.python-version }}
+          activate-environment: true
+
+      - name: Install package
+        run: |
+          uv pip install "coola[all]"
+
+      - name: Run some checks
+        run: |
+          python tests/package_checks.py
+
+
+  stable-min:
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    strategy:
+      max-parallel: 8
+      fail-fast: false
+      matrix:
+        os: [
+          ubuntu-latest,
+          ubuntu-24.04,
+          ubuntu-22.04,
+          ubuntu-24.04-arm,
+          ubuntu-22.04-arm,
+          macos-latest,
+          macos-26,
+          macos-15,
+          macos-14,
+          macos-15-intel,
+        ]
+        python-version: [ '3.14', '3.13', '3.12', '3.11', '3.10' ]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Install uv and set the python version
+        uses: astral-sh/setup-uv@v7
+        with:
+          python-version: ${{ matrix.python-version }}
+          activate-environment: true
+
+      - name: Install package
+        run: |
+          uv pip install coola
+
+      - name: Run some checks
+        run: |
+          python tests/package_checks.py
+
+
+  latest-all:
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    strategy:
+      max-parallel: 8
+      fail-fast: false
+      matrix:
+        os: [
+          ubuntu-latest,
+          ubuntu-24.04,
+          ubuntu-22.04,
+          ubuntu-24.04-arm,
+          ubuntu-22.04-arm,
+          macos-latest,
+          macos-26,
+          macos-15,
+          macos-14,
+          macos-15-intel,
+        ]
+        python-version: [ '3.14', '3.13', '3.12', '3.11', '3.10' ]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Install uv and set the python version
+        uses: astral-sh/setup-uv@v7
+        with:
+          python-version: ${{ matrix.python-version }}
+          activate-environment: true
+
+      - name: Install package
+        run: |
+          uv pip install --pre "coola[all]"
+
+      - name: Run some checks
+        run: |
+          python tests/package_checks.py
+
+
+  latest-min:
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    strategy:
+      max-parallel: 8
+      fail-fast: false
+      matrix:
+        os: [
+          ubuntu-latest,
+          ubuntu-24.04,
+          ubuntu-22.04,
+          ubuntu-24.04-arm,
+          ubuntu-22.04-arm,
+          macos-latest,
+          macos-26,
+          macos-15,
+          macos-14,
+          macos-15-intel,
+        ]
+        python-version: [ '3.14', '3.13', '3.12', '3.11', '3.10' ]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Install uv and set the python version
+        uses: astral-sh/setup-uv@v7
+        with:
+          python-version: ${{ matrix.python-version }}
+          activate-environment: true
+
+      - name: Install package
+        run: |
+          uv pip install --pre coola
+
+      - name: Run some checks
+        run: |
+          python tests/package_checks.py
+
+
+  packaging:
+    needs: get-versions
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    strategy:
+      max-parallel: 8
+      fail-fast: false
+      matrix:
+        os: [ ubuntu-latest ]
+        python-version: [ '3.14', '3.13', '3.12', '3.11', '3.10' ]
+        package-version: ${{ fromJson(needs.get-versions.outputs.package_versions).packaging }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Install uv and set the python version
+        uses: astral-sh/setup-uv@v7
+        with:
+          python-version: ${{ matrix.python-version }}
+          activate-environment: true
+
+      - name: Install package
+        run: |
+          uv pip install coola
+
+      - name: Install valid package version
+        uses: durandtibo/uv-install-package-action@v0.1.1
+        with:
+          package-name: 'packaging'
+          package-version: ${{ matrix.package-version }}
+          python-version: ${{ matrix.python-version }}
+
+      - name: Run some checks
+        run: |
+          python tests/package_checks.py
+
+
+  requests:
+    needs: get-versions
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    strategy:
+      max-parallel: 8
+      fail-fast: false
+      matrix:
+        os: [ ubuntu-latest ]
+        python-version: [ '3.14', '3.13', '3.12', '3.11', '3.10' ]
+        package-version: ${{ fromJson(needs.get-versions.outputs.package_versions).requests }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Install uv and set the python version
+        uses: astral-sh/setup-uv@v7
+        with:
+          python-version: ${{ matrix.python-version }}
+          activate-environment: true
+
+      - name: Install package
+        run: |
+          uv pip install coola
+
+      - name: Install valid package version
+        uses: durandtibo/uv-install-package-action@v0.1.1
+        with:
+          package-name: 'requests'
+          package-version: ${{ matrix.package-version }}
+          python-version: ${{ matrix.python-version }}
+
+      - name: Run some checks
+        run: |
+          python tests/package_checks.py
