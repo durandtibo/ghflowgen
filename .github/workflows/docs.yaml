@@ -1,16 +1,16 @@
-name: Update dependencies
+name: Documentation (stable)
 on:
-  schedule:
-    - cron: "0 6 * * 6" # run every Saturday at 6:00 AM UTC
   workflow_call:
   workflow_dispatch:  # to trigger manually
+  push:
+    branches:
+      - "v*.*.*"
 
 permissions:
   contents: write
-  pull-requests: write
 
 jobs:
-  update-deps:
+  build:
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
@@ -29,11 +29,7 @@ jobs:
 
       - name: Install packages
         run: |
-          inv update
-
-      - name: Install packages
-        run: |
-          inv install --all-deps
+          inv install --all-deps --docs
 
       - name: Show python config
         run: |
@@ -43,16 +39,14 @@ jobs:
         run: |
           inv show-installed-packages
 
-      - name: Run unit tests
+      - name: Setup doc deploy
+        env:
+          CI_BOT_EMAIL: ${{secrets.CI_BOT_EMAIL}}
         run: |
-          inv unit-test --cov
+          git config --global user.name ci-docs-bot
+          git config --global user.email $CI_BOT_EMAIL
+          git fetch origin gh-pages --depth=1 --tags
 
-      - uses: peter-evans/create-pull-request@v7
-        if: always()
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          branch: update/dependencies
-          title: Update dependencies
-          commit-message: "Update dependencies"
-          body: Update dependencies to latest compatible version.
-          author: ci-bot <${{secrets.CI_BOT_EMAIL}}>
+      - name: Build and deploy documentation
+        run: |
+          inv publish-doc-latest
