@@ -54,16 +54,66 @@ jobs:
           echo "requests: ${{ toJson(fromJson(steps.extract.outputs.versions).requests) }}"
 
 
-  example:
-    runs-on: ubuntu-latest
+#  example:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Create JSON output
+#        id: create_json
+#        run: |
+#          echo '{"name": "Alice", "age": 30}' > data.json
+#          echo "json_data=$(cat data.json)" >> $GITHUB_OUTPUT
+#      - name: Show data
+#        run: |
+#          echo ${{ steps.create_json.outputs.json_data }}
+#      - name: Use fromJson to extract a field
+#        run: echo "Name is ${{ fromJson(steps.create_json.outputs.json_data).name }}"
+
+
+  packaging:
+    needs: get-versions
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    strategy:
+      max-parallel: 8
+      fail-fast: false
+      matrix:
+        os: [ ubuntu-22.04 ]
+        python-version: [ '3.14', '3.13' ]
+        package-version: ${{ fromJson(steps.extract.outputs.versions).packaging }}
+
     steps:
-      - name: Create JSON output
-        id: create_json
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Install uv and set the python version
+        uses: astral-sh/setup-uv@v7
+        with:
+          python-version: ${{ matrix.python-version }}
+          activate-environment: true
+
+      - name: Install invoke
         run: |
-          echo '{"name": "Alice", "age": 30}' > data.json
-          echo "json_data=$(cat data.json)" >> $GITHUB_OUTPUT
-      - name: Show data
+          make install-invoke
+
+      - name: Install packages
         run: |
-          echo ${{ steps.create_json.outputs.json_data }}
-      - name: Use fromJson to extract a field
-        run: echo "Name is ${{ fromJson(steps.create_json.outputs.json_data).name }}"
+          inv install --all-deps
+
+      - name: Install valid package version
+        uses: durandtibo/uv-install-package-action@v0.1.1
+        with:
+          package-name: 'packaging'
+          package-version: ${{ matrix.package-version }}
+          python-version: ${{ matrix.python-version }}
+
+      - name: Show python config
+        run: |
+          inv show-python-config
+
+      - name: Show installed packages
+        run: |
+          inv show-installed-packages
+
+      - name: Run unit tests
+        run: |
+          inv unit-test
