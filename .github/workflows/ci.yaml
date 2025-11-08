@@ -30,7 +30,7 @@ jobs:
 #    uses: ./.github/workflows/test-deps.yaml
 
   get-versions:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     outputs:
       package_versions: ${{ steps.extract.outputs.versions }}
     steps:
