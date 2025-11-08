@@ -8,8 +8,8 @@ permissions:
   contents: read
 
 jobs:
-  get-versions:
-    uses: ./.github/workflows/get-versions.yaml
+  versions:
+    uses: ./.github/workflows/versions.yaml
 
   cyclic-imports:
     uses: ./.github/workflows/cyclic-imports.yaml
@@ -176,7 +176,7 @@ jobs:
 
 
   packaging:
-    needs: get-versions
+    needs: versions
     runs-on: ${{ matrix.os }}
     timeout-minutes: 10
     strategy:
@@ -185,7 +185,7 @@ jobs:
       matrix:
         os: [ ubuntu-latest ]
         python-version: [ '3.14', '3.13', '3.12', '3.11', '3.10' ]
-        package-version: ${{ fromJson(needs.get-versions.outputs.package_versions).packaging }}
+        package-version: ${{ fromJson(needs.versions.outputs.package_versions).packaging }}
 
     steps:
       - name: Checkout
@@ -214,7 +214,7 @@ jobs:
 
 
   requests:
-    needs: get-versions
+    needs: versions
     runs-on: ${{ matrix.os }}
     timeout-minutes: 10
     strategy:
@@ -223,7 +223,7 @@ jobs:
       matrix:
         os: [ ubuntu-latest ]
         python-version: [ '3.14', '3.13', '3.12', '3.11', '3.10' ]
-        package-version: ${{ fromJson(needs.get-versions.outputs.package_versions).requests }}
+        package-version: ${{ fromJson(needs.versions.outputs.package_versions).requests }}
 
     steps:
       - name: Checkout
