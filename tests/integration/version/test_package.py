@@ -2,12 +2,13 @@ from __future__ import annotations
 
 import pytest
 
-from flowforge.version import get_latest_major_versions
+from flowforge.version import get_latest_major_versions, get_latest_minor_versions
 
 
 @pytest.fixture(autouse=True)
 def _reset_cache() -> None:
     get_latest_major_versions.cache_clear()
+    get_latest_minor_versions.cache_clear()
 
 
 ###############################################
@@ -21,3 +22,47 @@ def test_get_latest_major_versions_requests() -> None:
 
 def test_get_latest_major_versions_torch() -> None:
     assert get_latest_major_versions("torch", upper="2.9") == ("1.13.1", "2.8.0")
+
+
+###############################################
+#     Tests for get_latest_minor_versions     #
+###############################################
+
+
+def test_get_latest_minor_versions_requests() -> None:
+    assert get_latest_minor_versions("requests", lower="2.10", upper="2.30") == (
+        "2.10.0",
+        "2.11.1",
+        "2.12.5",
+        "2.13.0",
+        "2.14.2",
+        "2.15.1",
+        "2.16.5",
+        "2.17.3",
+        "2.18.4",
+        "2.19.1",
+        "2.20.1",
+        "2.21.0",
+        "2.22.0",
+        "2.23.0",
+        "2.24.0",
+        "2.25.1",
+        "2.26.0",
+        "2.27.1",
+        "2.28.2",
+        "2.29.0",
+    )
+
+
+def test_get_latest_minor_versions_torch() -> None:
+    assert get_latest_minor_versions("torch", lower="2.0", upper="2.9") == (
+        "2.0.1",
+        "2.1.2",
+        "2.2.2",
+        "2.3.1",
+        "2.4.1",
+        "2.5.1",
+        "2.6.0",
+        "2.7.1",
+        "2.8.0",
+    )
