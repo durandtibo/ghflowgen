@@ -62,5 +62,8 @@ jobs:
         run: |
           echo '{"name": "Alice", "age": 30}' > data.json
           echo "json_data=$(cat data.json)" >> $GITHUB_OUTPUT
+      - name: Show data
+        run: |
+          echo ${{ steps.create_json.outputs.json_data }}
       - name: Use fromJson to extract a field
         run: echo "Name is ${{ fromJson(steps.create_json.outputs.json_data).name }}"
