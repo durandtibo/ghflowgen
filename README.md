@@ -115,6 +115,8 @@ To include all the dependencies, you can use the following command:
 uv pip install ghflowgen[all]
 ```
 
+### Dependencies
+
 Please check the [get started page](https://durandtibo.github.io/ghflowgen/get_started) to see how
 to
 install only some specific dependencies or other alternatives to install the library.
