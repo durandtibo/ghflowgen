@@ -5,10 +5,26 @@ from unittest.mock import Mock, patch
 
 import pytest
 
-from flowforge.utils.export import generate_unique_tmp_path, save_json
+from flowforge.utils.export import generate_unique_tmp_path, load_json, save_json
 
 if TYPE_CHECKING:
     from pathlib import Path
+
+
+@pytest.fixture(scope="module")
+def path_json(tmp_path_factory: pytest.TempPathFactory) -> Path:
+    path = tmp_path_factory.mktemp("tmp").joinpath("data.json")
+    save_json({"key1": [1, 2, 3], "key2": "abc"}, path)
+    return path
+
+
+###############################
+#     Tests for load_json     #
+###############################
+
+
+def test_load_json(path_json: Path) -> None:
+    assert load_json(path_json) == {"key1": [1, 2, 3], "key2": "abc"}
 
 
 ###############################
@@ -20,6 +36,7 @@ def test_save_json(tmp_path: Path) -> None:
     path = tmp_path.joinpath("tmp/data.json")
     save_json({"key1": [1, 2, 3], "key2": "abc"}, path)
     assert path.is_file()
+    assert load_json(path) == {"key1": [1, 2, 3], "key2": "abc"}
 
 
 def test_save_json_file_exist(tmp_path: Path) -> None:
@@ -34,6 +51,7 @@ def test_save_json_file_exist_ok(tmp_path: Path) -> None:
     save_json({"key1": [1, 2, 3], "key2": "abc"}, path)
     save_json({"key1": [3, 2, 1], "key2": "meow"}, path, exist_ok=True)
     assert path.is_file()
+    assert load_json(path) == {"key1": [3, 2, 1], "key2": "meow"}
 
 
 def test_save_json_file_exist_ok_dir(tmp_path: Path) -> None:

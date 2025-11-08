@@ -2,12 +2,42 @@ r"""Contain utility functions to export data to JSON format."""
 
 from __future__ import annotations
 
-__all__ = ["save_json", "generate_unique_tmp_path"]
+__all__ = ["generate_unique_tmp_path", "load_json", "save_json"]
 
 import json
 import uuid
 from pathlib import Path
 from typing import Any
+
+
+def load_json(path: Path) -> Any:
+    r"""Load the data from a given JSON file.
+
+    Args:
+        path: The path to the JSON file.
+
+    Returns:
+        The data from the JSON file.
+
+    Example usage:
+
+    ```pycon
+
+    >>> import tempfile
+    >>> from pathlib import Path
+    >>> from flowforge.utils.export import save_json, load_json
+    >>> with tempfile.TemporaryDirectory() as tmpdir:
+    ...     path = Path(tmpdir).joinpath("data.json")
+    ...     save_json({"key1": [1, 2, 3], "key2": "abc"}, path)
+    ...     data = load_json(path)
+    ...     data
+    ...
+    {'key1': [1, 2, 3], 'key2': 'abc'}
+
+    ```
+    """
+    with Path.open(path, mode="rb") as file:
+        return json.load(file)
 
 
 def save_json(to_save: Any, path: Path, *, exist_ok: bool = False) -> None:
@@ -34,8 +64,12 @@ def save_json(to_save: Any, path: Path, *, exist_ok: bool = False) -> None:
     >>> from pathlib import Path
     >>> from flowforge.utils.export import save_json
     >>> with tempfile.TemporaryDirectory() as tmpdir:
-    ...     save_json({"key1": [1, 2, 3], "key2": "abc"}, Path(tmpdir).joinpath("data.json"))
+    ...     path = Path(tmpdir).joinpath("data.json")
+    ...     save_json({"key1": [1, 2, 3], "key2": "abc"}, path)
+    ...     data = load_json(path)
+    ...     data
     ...
+    {'key1': [1, 2, 3], 'key2': 'abc'}
 
     ```
     """
