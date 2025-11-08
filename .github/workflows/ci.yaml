@@ -54,21 +54,6 @@ jobs:
           echo "requests: ${{ toJson(fromJson(steps.extract.outputs.versions).requests) }}"
 
 
-#  example:
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Create JSON output
-#        id: create_json
-#        run: |
-#          echo '{"name": "Alice", "age": 30}' > data.json
-#          echo "json_data=$(cat data.json)" >> $GITHUB_OUTPUT
-#      - name: Show data
-#        run: |
-#          echo ${{ steps.create_json.outputs.json_data }}
-#      - name: Use fromJson to extract a field
-#        run: echo "Name is ${{ fromJson(steps.create_json.outputs.json_data).name }}"
-
-
   packaging:
     needs: get-versions
     runs-on: ${{ matrix.os }}
@@ -79,7 +64,7 @@ jobs:
       matrix:
         os: [ ubuntu-22.04 ]
         python-version: [ '3.14', '3.13' ]
-        package-version: ${{ toJson(fromJson(needs.get-versions.outputs.versions).packaging) }}
+        package-version: ${{ fromJson(needs.get-versions.outputs.package_versions).packaging }}
 
     steps:
       - name: Checkout
