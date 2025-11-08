@@ -48,7 +48,7 @@ jobs:
 
       - name: Show versions (2)
         run: |
-          echo ${{ fromJson(steps.extract.outputs.versions) }}
-          echo ${{ fromJson(steps.extract.outputs.versions).coola }}
-          echo ${{ fromJson(steps.extract.outputs.versions).packaging }}
-          echo ${{ fromJson(steps.extract.outputs.versions).requests }}
+          echo "${{ fromJson(steps.extract.outputs.versions) }}"
+          echo "${{ fromJson(steps.extract.outputs.versions).coola }}"
+          echo "${{ fromJson(steps.extract.outputs.versions).packaging }}"
+          echo "${{ fromJson(steps.extract.outputs.versions).requests }}"
