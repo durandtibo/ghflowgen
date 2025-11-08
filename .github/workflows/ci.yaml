@@ -79,7 +79,7 @@ jobs:
       matrix:
         os: [ ubuntu-22.04 ]
         python-version: [ '3.14', '3.13' ]
-        package-version: ${{ fromJson(steps.extract.outputs.versions).packaging }}
+        package-version: ${{ fromJson(needs.get-versions.outputs.versions).packaging }}
 
     steps:
       - name: Checkout
