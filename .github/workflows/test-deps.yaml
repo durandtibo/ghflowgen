@@ -16,7 +16,7 @@ jobs:
     uses: ./.github/workflows/test-one-dep.yaml
     with:
       package-name: packaging
-      package-versions: ${{ fromJson(needs.get-versions.outputs.package_versions).packaging }}
+      package-versions: ${{ toJson(fromJson(needs.get-versions.outputs.package_versions).packaging) }}
 
 
   packaging:
