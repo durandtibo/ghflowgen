@@ -1,8 +1,12 @@
+# noqa: INP001
+r"""Script to create or update the package versions."""
+
 from __future__ import annotations
 
-import json
 import logging
+from pathlib import Path
 
+from flowforge.utils.export import save_json
 from flowforge.version import (
     get_latest_major_versions,
     get_latest_minor_versions,
@@ -26,7 +30,12 @@ def get_package_versions() -> dict[str, list[str]]:
 
 
 def main() -> None:
-    logger.info(get_package_versions())
+    r"""Generate the package versions and save them in a JSON file."""
+    versions = get_package_versions()
+    logger.info(f"{versions=}")
+    path = Path.cwd().joinpath("assets").joinpath("package_versions.json")
+    logger.info(f"Saving package versions to {path}")
+    save_json(versions, path, exist_ok=True)
 
 
 if __name__ == "__main__":
