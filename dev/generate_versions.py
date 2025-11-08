@@ -10,7 +10,6 @@ from ghflowgen.utils.export import save_json
 from ghflowgen.version import (
     get_latest_major_versions,
     get_latest_minor_versions,
-    get_versions,
 )
 
 logger = logging.getLogger(__name__)
@@ -23,7 +22,6 @@ def get_package_versions() -> dict[str, list[str]]:
         A dictionary with the versions for each package.
     """
     return {
-        "coola": list(get_versions("coola", lower="0.9.1", upper="1.0.0")),
         "packaging": list(get_latest_major_versions("packaging", lower="23.0")),
         "requests": list(get_latest_minor_versions("requests", lower="2.30.0", upper="3.0.0")),
     }
