@@ -40,7 +40,7 @@ jobs:
       - name: Read versions
         id: extract
         run: |
-          echo "versions=toJson($(cat assets/versions.json))" >> $GITHUB_OUTPUT
+          echo "versions=$(cat assets/versions.json)" >> $GITHUB_OUTPUT
 
       - name: Show versions
         run: |
@@ -48,10 +48,10 @@ jobs:
 
       - name: Show versions (2)
         run: |
-          echo "versions: ${{ fromJson(steps.extract.outputs.versions) }}"
-          echo "coola: ${{ fromJson(steps.extract.outputs.versions).coola }}"
-          echo "packaging: ${{ fromJson(steps.extract.outputs.versions).packaging }}"
-          echo "requests: ${{ fromJson(steps.extract.outputs.versions).requests }}"
+          echo "versions: ${{ toJson(fromJson(steps.extract.outputs.versions)) }}"
+          echo "coola: ${{ toJson(fromJson(steps.extract.outputs.versions).coola) }}"
+          echo "packaging: ${{ toJson(fromJson(steps.extract.outputs.versions).packaging) }}"
+          echo "requests: ${{ toJson(fromJson(steps.extract.outputs.versions).requests) }}"
 
 
   example:
