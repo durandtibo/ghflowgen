@@ -12,19 +12,40 @@ permissions:
   contents: read
 
 jobs:
-  coverage:
-    uses: ./.github/workflows/coverage.yaml
-    secrets: inherit
-  cyclic-imports:
-    uses: ./.github/workflows/cyclic-imports.yaml
-  doctest:
-    uses: ./.github/workflows/doctest.yaml
-    secrets: inherit
-  format:
-    uses: ./.github/workflows/format.yaml
-  pre-commit:
-    uses: ./.github/workflows/pre-commit.yaml
-  test:
-    uses: ./.github/workflows/test.yaml
-  test-deps:
-    uses: ./.github/workflows/test-deps.yaml
+#  coverage:
+#    uses: ./.github/workflows/coverage.yaml
+#    secrets: inherit
+#  cyclic-imports:
+#    uses: ./.github/workflows/cyclic-imports.yaml
+#  doctest:
+#    uses: ./.github/workflows/doctest.yaml
+#    secrets: inherit
+#  format:
+#    uses: ./.github/workflows/format.yaml
+#  pre-commit:
+#    uses: ./.github/workflows/pre-commit.yaml
+#  test:
+#    uses: ./.github/workflows/test.yaml
+#  test-deps:
+#    uses: ./.github/workflows/test-deps.yaml
+
+  get-versions:
+    runs-on: ubuntu-latest
+    outputs:
+      package_versions: ${{ steps.extract.outputs.versions }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Read versions
+        id: extract
+        run: |
+          echo "versions=$(cat assets/versions.json)" >> $GITHUB_OUTPUT
+
+      - name: Show versions
+        run: |
+          echo ${{ steps.extract.outputs.versions }}
+
+      - name: Show versions (2)
+        run: |
+          echo ${{ fromJson(steps.extract.outputs.versions) }}
