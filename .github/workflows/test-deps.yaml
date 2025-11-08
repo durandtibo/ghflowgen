@@ -11,6 +11,14 @@ jobs:
     uses: ./.github/workflows/get-versions.yaml
 
 
+  packaging2:
+    needs: get-versions
+    uses: ./.github/workflows/test-one-dep.yaml
+    with:
+      package-name: packaging
+      package-versions: ${{ fromJson(needs.get-versions.outputs.package_versions).packaging }}
+
+
   packaging:
     needs: get-versions
     runs-on: ${{ matrix.os }}
