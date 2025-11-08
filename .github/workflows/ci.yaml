@@ -52,3 +52,15 @@ jobs:
           echo "coola: ${{ fromJson(steps.extract.outputs.versions).coola }}"
           echo "packaging: ${{ fromJson(steps.extract.outputs.versions).packaging }}"
           echo "requests: ${{ fromJson(steps.extract.outputs.versions).requests }}"
+
+
+  example:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create JSON output
+        id: create_json
+        run: |
+          echo '{"name": "Alice", "age": 30}' > data.json
+          echo "json_data=$(cat data.json)" >> $GITHUB_OUTPUT
+      - name: Use fromJson to extract a field
+        run: echo "Name is ${{ fromJson(steps.create_json.outputs.json_data).name }}"
