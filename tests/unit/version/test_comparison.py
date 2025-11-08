@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import operator
 
-from flowforge.version import compare_version
+from ghflowgen.version import compare_version
 
 #####################################
 #     Tests for compare_version     #

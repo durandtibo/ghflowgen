@@ -1,24 +1,24 @@
 # Home
 
 <p align="center">
-    <a href="https://github.com/durandtibo/flowforge/actions">
-        <img alt="CI" src="https://github.com/durandtibo/flowforge/workflows/CI/badge.svg">
+    <a href="https://github.com/durandtibo/ghflowgen/actions">
+        <img alt="CI" src="https://github.com/durandtibo/ghflowgen/workflows/CI/badge.svg">
     </a>
-    <a href="https://github.com/durandtibo/flowforge/actions">
-        <img alt="Nightly Tests" src="https://github.com/durandtibo/flowforge/workflows/Nightly%20Tests/badge.svg">
+    <a href="https://github.com/durandtibo/ghflowgen/actions">
+        <img alt="Nightly Tests" src="https://github.com/durandtibo/ghflowgen/workflows/Nightly%20Tests/badge.svg">
     </a>
-    <a href="https://github.com/durandtibo/flowforge/actions">
-        <img alt="Nightly Package Tests" src="https://github.com/durandtibo/flowforge/workflows/Nightly%20Package%20Tests/badge.svg">
+    <a href="https://github.com/durandtibo/ghflowgen/actions">
+        <img alt="Nightly Package Tests" src="https://github.com/durandtibo/ghflowgen/workflows/Nightly%20Package%20Tests/badge.svg">
     </a>
-    <a href="https://codecov.io/gh/durandtibo/flowforge">
-        <img alt="Codecov" src="https://codecov.io/gh/durandtibo/flowforge/branch/main/graph/badge.svg">
+    <a href="https://codecov.io/gh/durandtibo/ghflowgen">
+        <img alt="Codecov" src="https://codecov.io/gh/durandtibo/ghflowgen/branch/main/graph/badge.svg">
     </a>
     <br/>
-    <a href="https://durandtibo.github.io/flowforge/">
-        <img alt="Documentation" src="https://github.com/durandtibo/flowforge/workflows/Documentation%20(stable)/badge.svg">
+    <a href="https://durandtibo.github.io/ghflowgen/">
+        <img alt="Documentation" src="https://github.com/durandtibo/ghflowgen/workflows/Documentation%20(stable)/badge.svg">
     </a>
-    <a href="https://durandtibo.github.io/flowforge/">
-        <img alt="Documentation" src="https://github.com/durandtibo/flowforge/workflows/Documentation%20(unstable)/badge.svg">
+    <a href="https://durandtibo.github.io/ghflowgen/">
+        <img alt="Documentation" src="https://github.com/durandtibo/ghflowgen/workflows/Documentation%20(unstable)/badge.svg">
     </a>
     <br/>
     <a href="https://github.com/psf/black">
@@ -34,21 +34,21 @@
         <img  alt="Doc style: google" src="https://img.shields.io/badge/try%2Fexcept%20style-tryceratops%20%F0%9F%A6%96%E2%9C%A8-black">
     </a>
     <br/>
-    <a href="https://pypi.org/project/flowforge/">
-        <img alt="PYPI version" src="https://img.shields.io/pypi/v/flowforge">
+    <a href="https://pypi.org/project/ghflowgen/">
+        <img alt="PYPI version" src="https://img.shields.io/pypi/v/ghflowgen">
     </a>
-    <a href="https://pypi.org/project/flowforge/">
-        <img alt="Python" src="https://img.shields.io/pypi/pyversions/flowforge.svg">
+    <a href="https://pypi.org/project/ghflowgen/">
+        <img alt="Python" src="https://img.shields.io/pypi/pyversions/ghflowgen.svg">
     </a>
     <a href="https://opensource.org/licenses/BSD-3-Clause">
-        <img alt="BSD-3-Clause" src="https://img.shields.io/pypi/l/flowforge">
+        <img alt="BSD-3-Clause" src="https://img.shields.io/pypi/l/ghflowgen">
     </a>
     <br/>
-    <a href="https://pepy.tech/project/flowforge">
-        <img  alt="Downloads" src="https://static.pepy.tech/badge/flowforge">
+    <a href="https://pepy.tech/project/ghflowgen">
+        <img  alt="Downloads" src="https://static.pepy.tech/badge/ghflowgen">
     </a>
-    <a href="https://pepy.tech/project/flowforge">
-        <img  alt="Monthly downloads" src="https://static.pepy.tech/badge/flowforge/month">
+    <a href="https://pepy.tech/project/ghflowgen">
+        <img  alt="Monthly downloads" src="https://static.pepy.tech/badge/ghflowgen/month">
     </a>
     <br/>
 </p>
@@ -59,12 +59,12 @@ TODO
 
 ## API stability
 
-:warning: While `flowforge` is in development stage, no API is guaranteed to be stable from one
+:warning: While `ghflowgen` is in development stage, no API is guaranteed to be stable from one
 release to the next. In fact, it is very likely that the API will change multiple times before a
-stable 1.0.0 release. In practice, this means that upgrading `flowforge` to a new version will
-possibly break any code that was using the old version of `flowforge`.
+stable 1.0.0 release. In practice, this means that upgrading `ghflowgen` to a new version will
+possibly break any code that was using the old version of `ghflowgen`.
 
 ## License
 
-`flowforge` is licensed under BSD 3-Clause "New" or "Revised" license available
-in [LICENSE](https://github.com/durandtibo/flowforge/blob/main/LICENSE) file.
+`ghflowgen` is licensed under BSD 3-Clause "New" or "Revised" license available
+in [LICENSE](https://github.com/durandtibo/ghflowgen/blob/main/LICENSE) file.

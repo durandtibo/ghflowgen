@@ -1,4 +1,4 @@
-site_name: flowforge
+site_name: ghflowgen
 theme:
   name: material
   features:
@@ -21,10 +21,10 @@ nav:
   - Reference:
       - refs/utils.md
       - refs/version.md
-  - GitHub: https://github.com/durandtibo/flowforge
+  - GitHub: https://github.com/durandtibo/ghflowgen
 
-repo_url: https://github.com/durandtibo/flowforge
-repo_name: durandtibo/flowforge
+repo_url: https://github.com/durandtibo/ghflowgen
+repo_name: durandtibo/ghflowgen
 
 markdown_extensions:
   - pymdownx.highlight

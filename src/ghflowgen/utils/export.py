@@ -25,7 +25,7 @@ def load_json(path: Path) -> Any:
 
     >>> import tempfile
     >>> from pathlib import Path
-    >>> from flowforge.utils.export import save_json, load_json
+    >>> from ghflowgen.utils.export import save_json, load_json
     >>> with tempfile.TemporaryDirectory() as tmpdir:
     ...     path = Path(tmpdir).joinpath("data.json")
     ...     save_json({"key1": [1, 2, 3], "key2": "abc"}, path)
@@ -62,7 +62,7 @@ def save_json(to_save: Any, path: Path, *, exist_ok: bool = False) -> None:
 
     >>> import tempfile
     >>> from pathlib import Path
-    >>> from flowforge.utils.export import save_json
+    >>> from ghflowgen.utils.export import save_json
     >>> with tempfile.TemporaryDirectory() as tmpdir:
     ...     path = Path(tmpdir).joinpath("data.json")
     ...     save_json({"key1": [1, 2, 3], "key2": "abc"}, path)
@@ -110,7 +110,7 @@ def generate_unique_tmp_path(path: Path) -> Path:
 
     >>> import tempfile
     >>> from pathlib import Path
-    >>> from flowforge.utils.export import generate_unique_tmp_path
+    >>> from ghflowgen.utils.export import generate_unique_tmp_path
     >>> with tempfile.TemporaryDirectory() as tmpdir:
     ...     path = generate_unique_tmp_path(Path(tmpdir).joinpath("data.json"))
     ...     path

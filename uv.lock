@@ -371,7 +371,7 @@ wheels = [
 ]
 
 [[package]]
-name = "flowforge"
+name = "ghflowgen"
 version = "0.0.1a0"
 source = { editable = "." }
 dependencies = [

@@ -25,7 +25,7 @@ def get_pypi_versions(package: str) -> tuple[str, ...]:
 
     ```pycon
 
-    >>> from flowforge.utils.pypi import get_pypi_versions
+    >>> from ghflowgen.utils.pypi import get_pypi_versions
     >>> versions = get_pypi_versions("requests")  # doctest: +SKIP
 
     ```

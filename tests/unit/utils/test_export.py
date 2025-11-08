@@ -5,7 +5,7 @@ from unittest.mock import Mock, patch
 
 import pytest
 
-from flowforge.utils.export import generate_unique_tmp_path, load_json, save_json
+from ghflowgen.utils.export import generate_unique_tmp_path, load_json, save_json
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -67,28 +67,28 @@ def test_save_json_file_exist_ok_dir(tmp_path: Path) -> None:
 
 
 def test_generate_unique_tmp_path_no_suffix(tmp_path: Path) -> None:
-    with patch("flowforge.utils.export.uuid.uuid4", lambda: Mock(hex="a1b2c3")):
+    with patch("ghflowgen.utils.export.uuid.uuid4", lambda: Mock(hex="a1b2c3")):
         assert generate_unique_tmp_path(tmp_path.joinpath("data")) == tmp_path.joinpath(
             "data-a1b2c3"
         )
 
 
 def test_generate_unique_tmp_path_one_suffix(tmp_path: Path) -> None:
-    with patch("flowforge.utils.export.uuid.uuid4", lambda: Mock(hex="a1b2c3")):
+    with patch("ghflowgen.utils.export.uuid.uuid4", lambda: Mock(hex="a1b2c3")):
         assert generate_unique_tmp_path(tmp_path.joinpath("data.json")) == tmp_path.joinpath(
             "data-a1b2c3.json"
         )
 
 
 def test_generate_unique_tmp_path_two_suffixes(tmp_path: Path) -> None:
-    with patch("flowforge.utils.export.uuid.uuid4", lambda: Mock(hex="a1b2c3")):
+    with patch("ghflowgen.utils.export.uuid.uuid4", lambda: Mock(hex="a1b2c3")):
         assert generate_unique_tmp_path(tmp_path.joinpath("data.tar.gz")) == tmp_path.joinpath(
             "data-a1b2c3.tar.gz"
         )
 
 
 def test_generate_unique_tmp_path_dir(tmp_path: Path) -> None:
-    with patch("flowforge.utils.export.uuid.uuid4", lambda: Mock(hex="a1b2c3")):
+    with patch("ghflowgen.utils.export.uuid.uuid4", lambda: Mock(hex="a1b2c3")):
         assert generate_unique_tmp_path(tmp_path.joinpath("data/")) == tmp_path.joinpath(
             "data-a1b2c3"
         )

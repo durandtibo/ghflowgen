@@ -1,5 +1,5 @@
 [project]
-name = "flowforge"
+name = "ghflowgen"
 version = "0.0.1a0"
 description = "Library to generate GitHub action workflows"
 readme = "README.md"
@@ -68,7 +68,7 @@ source = ["src", "*/site-packages"]
 
 [tool.coverage.run]
 branch = true
-source = ["flowforge"]
+source = ["ghflowgen"]
 
 [tool.coverage.report]
 show_missing = true

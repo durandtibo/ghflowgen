@@ -1,1 +1,1 @@
-::: flowforge.version
+::: ghflowgen.version

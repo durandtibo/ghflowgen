@@ -39,7 +39,7 @@ def filter_range_versions(
 
     ```pycon
 
-    >>> from flowforge.version import filter_range_versions
+    >>> from ghflowgen.version import filter_range_versions
     >>> versions = filter_range_versions(
     ...     ["1.0.0", "1.2.0", "1.3.0", "2.0.0"], lower="1.1.0", upper="2.0.0"
     ... )
@@ -81,7 +81,7 @@ def filter_stable_versions(versions: Sequence[str]) -> list[str]:
 
     ```pycon
 
-    >>> from flowforge.version import filter_stable_versions
+    >>> from ghflowgen.version import filter_stable_versions
     >>> versions = filter_stable_versions(
     ...     ["1.0.0", "1.0.0a1", "2.0.0", "2.0.0.dev1", "3.0.0.post1"]
     ... )
@@ -114,7 +114,7 @@ def filter_valid_versions(versions: Sequence[str]) -> list[str]:
 
     ```pycon
 
-    >>> from flowforge.version import filter_valid_versions
+    >>> from ghflowgen.version import filter_valid_versions
     >>> versions = filter_valid_versions(
     ...     [
     ...         "1.0.0",
@@ -162,7 +162,7 @@ def latest_major_versions(versions: Sequence[str]) -> list[str]:
 
     ```pycon
 
-    >>> from flowforge.version import latest_major_versions
+    >>> from ghflowgen.version import latest_major_versions
     >>> versions = latest_major_versions(["1.0.0", "1.1.0", "1.2.0", "1.2.1", "2.0.0"])
     >>> versions
     ['1.2.1', '2.0.0']
@@ -199,7 +199,7 @@ def latest_minor_versions(versions: Sequence[str]) -> list[str]:
 
     ```pycon
 
-    >>> from flowforge.version import latest_major_versions
+    >>> from ghflowgen.version import latest_major_versions
     >>> versions = latest_minor_versions(["1.0.0", "1.0.1", "1.1.0", "1.1.2", "2.0.0", "2.0.3"])
     >>> versions
     ['1.0.1', '1.1.2', '2.0.3']

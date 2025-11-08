@@ -6,8 +6,8 @@ from __future__ import annotations
 import logging
 from pathlib import Path
 
-from flowforge.utils.export import save_json
-from flowforge.version import (
+from ghflowgen.utils.export import save_json
+from ghflowgen.version import (
     get_latest_major_versions,
     get_latest_minor_versions,
     get_versions,

@@ -8,7 +8,7 @@ from typing import TYPE_CHECKING
 
 from packaging.version import Version
 
-from flowforge.version.runtime import get_package_version
+from ghflowgen.version.runtime import get_package_version
 
 if TYPE_CHECKING:
     from collections.abc import Callable
@@ -30,7 +30,7 @@ def compare_version(package: str, op: Callable, version: str) -> bool:
     ```pycon
 
     >>> import operator
-    >>> from flowforge.version import compare_version
+    >>> from ghflowgen.version import compare_version
     >>> compare_version("pytest", op=operator.ge, version="7.3.0")
     True
 
