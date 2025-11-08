@@ -85,9 +85,9 @@ def save_json(to_save: Any, path: Path, *, exist_ok: bool = False) -> None:
     path.parent.mkdir(exist_ok=True, parents=True)
 
     # Save to tmp, then commit by moving the file in case the job gets
-    # interrujsoned while writing the file
+    # interrupted while writing the file
     tmp_path = generate_unique_tmp_path(path)
-    with Path.open(path, "w") as file:
+    with Path.open(tmp_path, "w") as file:
         json.dump(to_save, file, sort_keys=False)
     tmp_path.rename(path)
 
