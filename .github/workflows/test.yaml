@@ -32,27 +32,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
 
-      - name: Install uv and set the python version
-        uses: astral-sh/setup-uv@v7
+      - name: Setup python environment
+        uses: ./.github/actions/setup-env
         with:
-          python-version: ${{ matrix.python-version }}
-          activate-environment: true
-
-      - name: Install invoke
-        run: |
-          make install-invoke
-
-      - name: Install packages
-        run: |
-          inv install --all-deps
-
-      - name: Show python config
-        run: |
-          inv show-python-config
-
-      - name: Show installed packages
-        run: |
-          inv show-installed-packages
+          python-version: '3.13'
 
       - name: Run unit tests
         run: |
@@ -88,27 +71,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
 
-      - name: Install uv and set the python version
-        uses: astral-sh/setup-uv@v7
+      - name: Setup python environment
+        uses: ./.github/actions/setup-env
         with:
-          python-version: ${{ matrix.python-version }}
-          activate-environment: true
-
-      - name: Install invoke
-        run: |
-          make install-invoke
-
-      - name: Install packages
-        run: |
-          inv install
-
-      - name: Show python config
-        run: |
-          inv show-python-config
-
-      - name: Show installed packages
-        run: |
-          inv show-installed-packages
+          python-version: '3.13'
 
       - name: Run unit tests
         run: |
