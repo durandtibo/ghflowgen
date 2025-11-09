@@ -1,0 +1,38 @@
+name: "Setup Python environment"
+description: "Checkout code and install dependencies"
+
+inputs:
+  python-version:
+    required: true
+    description: "Python version to use"
+
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/checkout@v5
+
+    - name: Install uv and set the python version
+      uses: astral-sh/setup-uv@v7
+      with:
+        python-version: ${{ inputs.python-version }}
+        activate-environment: true
+
+    - name: Install invoke
+      shell: bash
+      run: |
+        make install-invoke
+
+    - name: Install packages
+      shell: bash
+      run: |
+        inv install --all-deps
+
+    - name: Show python config
+      shell: bash
+      run: |
+        inv show-python-config
+
+    - name: Show installed packages
+      shell: bash
+      run: |
+        inv show-installed-packages
