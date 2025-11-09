@@ -125,6 +125,7 @@ The following is the corresponding `ghflowgen` versions and tested dependencies.
 | `ghflowgen` | `packaging`    | `requests`      | `python`       |
 |-------------|----------------|-----------------|----------------|
 | `main`      | `>=23.0,<26.0` | `>=2.30.0,<3.0` | `>=3.10,<3.15` |
+| `0.0.1`     | `>=23.0,<26.0` | `>=2.30.0,<3.0` | `>=3.10,<3.15` |
 
 <sup>*</sup> indicates an optional dependency
 
