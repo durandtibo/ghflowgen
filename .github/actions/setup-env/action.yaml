@@ -6,6 +6,14 @@ inputs:
     default: "3.13"
     description: "Python version to use"
     required: false
+  package-name:
+    default: ""
+    description: "Optional package name to install"
+    required: false
+  package-versions:
+    default: ""
+    description: "Optional package version to install"
+    required: false
 
 runs:
   using: "composite"
@@ -25,6 +33,14 @@ runs:
       shell: bash
       run: |
         inv install --all-deps
+
+    - name: Install valid package version
+      if: ${{ inputs.package-name != '' }}
+      uses: durandtibo/uv-install-package-action@v0.1.1
+      with:
+        package-name: ${{ inputs.package-name }}
+        package-version: ${{ matrix.package-version }}
+        python-version: ${{ matrix.python-version }}
 
     - name: Show python config
       shell: bash

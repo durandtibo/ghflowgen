@@ -14,7 +14,8 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
-      - uses: ./.github/actions/setup-env
+      - name: Setup python environment
+        uses: ./.github/actions/setup-env
         with:
           python-version: '3.13'
 
@@ -29,7 +30,8 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
-      - uses: ./.github/actions/setup-env
+      - name: Setup python environment
+        uses: ./.github/actions/setup-env
         with:
           python-version: '3.13'
 
