@@ -4,7 +4,6 @@ from __future__ import annotations
 
 __all__ = ["get_latest_major_versions", "get_latest_minor_versions", "get_versions"]
 
-from functools import lru_cache
 
 from ghflowgen.utils.pypi import get_pypi_versions
 from ghflowgen.version import sort_versions
@@ -18,7 +17,6 @@ from ghflowgen.version.filtering import (
 )
 
 
-@lru_cache
 def get_versions(
     package: str, lower: str | None = None, upper: str | None = None
 ) -> tuple[str, ...]:
@@ -52,7 +50,6 @@ def get_versions(
     return tuple(versions)
 
 
-@lru_cache
 def get_latest_major_versions(
     package: str, lower: str | None = None, upper: str | None = None
 ) -> tuple[str, ...]:
@@ -83,7 +80,6 @@ def get_latest_major_versions(
     return tuple(latest_major_versions(versions))
 
 
-@lru_cache
 def get_latest_minor_versions(
     package: str, lower: str | None = None, upper: str | None = None
 ) -> tuple[str, ...]:

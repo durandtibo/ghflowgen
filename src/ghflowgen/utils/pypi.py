@@ -21,7 +21,7 @@ def get_pypi_versions(package: str, reverse: bool = False) -> tuple[str, ...]:
             sort in descending order.
 
     Returns:
-        A list containing the version strings.
+        A list containing the sorted version strings.
 
     Example usage:
 
