@@ -1,12 +1,12 @@
 [project]
 name = "ghflowgen"
-version = "0.0.1"
-description = "Library to generate GitHub action workflows"
+version = "0.0.2a0"
+description = "Library to manage GitHub Action workflows"
 readme = "README.md"
 authors = [
   { name = "Thibaut Durand", email = "durand.tibo+gh@gmail.com" },
 ]
-keywords = ["data", "analysis", "report"]
+keywords = ["GitHub Action", "workflow"]
 license = "BSD-3-Clause"
 
 classifiers = [

@@ -14,6 +14,7 @@ __all__ = [
     "get_versions",
     "latest_major_versions",
     "latest_minor_versions",
+    "unique_versions",
 ]
 
 from ghflowgen.version.comparison import compare_version
@@ -23,6 +24,7 @@ from ghflowgen.version.filtering import (
     filter_valid_versions,
     latest_major_versions,
     latest_minor_versions,
+    unique_versions,
 )
 from ghflowgen.version.package import (
     get_latest_major_versions,
