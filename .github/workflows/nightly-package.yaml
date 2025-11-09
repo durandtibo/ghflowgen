@@ -177,75 +177,14 @@ jobs:
 
   packaging:
     needs: get-versions
-    runs-on: ${{ matrix.os }}
-    timeout-minutes: 10
-    strategy:
-      max-parallel: 8
-      fail-fast: false
-      matrix:
-        os: [ ubuntu-latest ]
-        python-version: [ '3.14', '3.13', '3.12', '3.11', '3.10' ]
-        package-version: ${{ fromJson(needs.get-versions.outputs.package_versions).packaging }}
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v5
-
-      - name: Install uv and set the python version
-        uses: astral-sh/setup-uv@v7
-        with:
-          python-version: ${{ matrix.python-version }}
-          activate-environment: true
-
-      - name: Install package
-        run: |
-          uv pip install ghflowgen
-
-      - name: Install valid package version
-        uses: durandtibo/uv-install-package-action@v0.1.1
-        with:
-          package-name: 'packaging'
-          package-version: ${{ matrix.package-version }}
-          python-version: ${{ matrix.python-version }}
-
-      - name: Run some checks
-        run: |
-          python tests/package_checks.py
-
+    uses: ./.github/workflows/test-package-dep.yaml
+    with:
+      package-name: packaging
+      package-versions: ${{ toJson(fromJson(needs.get-versions.outputs.package_versions).packaging) }}
 
   requests:
     needs: get-versions
-    runs-on: ${{ matrix.os }}
-    timeout-minutes: 10
-    strategy:
-      max-parallel: 8
-      fail-fast: false
-      matrix:
-        os: [ ubuntu-latest ]
-        python-version: [ '3.14', '3.13', '3.12', '3.11', '3.10' ]
-        package-version: ${{ fromJson(needs.get-versions.outputs.package_versions).requests }}
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v5
-
-      - name: Install uv and set the python version
-        uses: astral-sh/setup-uv@v7
-        with:
-          python-version: ${{ matrix.python-version }}
-          activate-environment: true
-
-      - name: Install package
-        run: |
-          uv pip install ghflowgen
-
-      - name: Install valid package version
-        uses: durandtibo/uv-install-package-action@v0.1.1
-        with:
-          package-name: 'requests'
-          package-version: ${{ matrix.package-version }}
-          python-version: ${{ matrix.python-version }}
-
-      - name: Run some checks
-        run: |
-          python tests/package_checks.py
+    uses: ./.github/workflows/test-package-dep.yaml
+    with:
+      package-name: requests
+      package-versions: ${{ toJson(fromJson(needs.get-versions.outputs.package_versions).requests) }}
