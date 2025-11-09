@@ -1,6 +1,6 @@
 [project]
 name = "ghflowgen"
-version = "0.0.1a1"
+version = "0.0.1"
 description = "Library to generate GitHub action workflows"
 readme = "README.md"
 authors = [
