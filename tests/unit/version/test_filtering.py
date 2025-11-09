@@ -6,6 +6,7 @@ from ghflowgen.version import (
     filter_valid_versions,
     latest_major_versions,
     latest_minor_versions,
+    sort_versions,
     unique_versions,
 )
 
@@ -227,7 +228,15 @@ def test_latest_minor_versions_empty() -> None:
 
 
 def test_unique_versions() -> None:
-    assert unique_versions(["1.0.0", "1.0.1", "1.0.0", "1.2.0"]) == ["1.0.0", "1.0.1", "1.2.0"]
+    assert sort_versions(unique_versions(["1.0.0", "1.0.1", "1.0.0", "1.2.0"])) == [
+        "1.0.0",
+        "1.0.1",
+        "1.2.0",
+    ]
+
+
+def test_unique_versions_single_item() -> None:
+    assert sort_versions(unique_versions(["1.0.0"])) == ["1.0.0"]
 
 
 def test_unique_versions_empty() -> None:
