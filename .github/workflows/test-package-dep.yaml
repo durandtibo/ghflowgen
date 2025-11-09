@@ -1,4 +1,4 @@
-name: Test Package
+name: Test Package with Dependency Version
 on:
   workflow_call:
     inputs:
