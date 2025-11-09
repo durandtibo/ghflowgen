@@ -14,10 +14,11 @@ __all__ = [
     "get_versions",
     "latest_major_versions",
     "latest_minor_versions",
+    "sort_versions",
     "unique_versions",
 ]
 
-from ghflowgen.version.comparison import compare_version
+from ghflowgen.version.comparison import compare_version, sort_versions
 from ghflowgen.version.filtering import (
     filter_range_versions,
     filter_stable_versions,
