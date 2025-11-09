@@ -7,12 +7,14 @@ __all__ = ["get_latest_major_versions", "get_latest_minor_versions", "get_versio
 from functools import lru_cache
 
 from ghflowgen.utils.pypi import get_pypi_versions
+from ghflowgen.version import sort_versions
 from ghflowgen.version.filtering import (
     filter_range_versions,
     filter_stable_versions,
     filter_valid_versions,
     latest_major_versions,
     latest_minor_versions,
+    unique_versions,
 )
 
 
@@ -44,7 +46,10 @@ def get_versions(
     versions = get_pypi_versions(package)
     versions = filter_valid_versions(versions)
     versions = filter_stable_versions(versions)
-    return tuple(filter_range_versions(versions, lower=lower, upper=upper))
+    versions = filter_range_versions(versions, lower=lower, upper=upper)
+    versions = unique_versions(versions)
+    versions = sort_versions(versions)
+    return tuple(versions)
 
 
 @lru_cache
