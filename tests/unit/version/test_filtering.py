@@ -6,6 +6,7 @@ from ghflowgen.version import (
     filter_valid_versions,
     latest_major_versions,
     latest_minor_versions,
+    unique_versions,
 )
 
 ###########################################
@@ -218,3 +219,16 @@ def test_latest_minor_versions_missing_version() -> None:
 
 def test_latest_minor_versions_empty() -> None:
     assert latest_minor_versions([]) == []
+
+
+#####################################
+#     Tests for unique_versions     #
+#####################################
+
+
+def test_unique_versions() -> None:
+    assert unique_versions(["1.0.0", "1.0.1", "1.0.0", "1.2.0"]) == ["1.0.0", "1.0.1", "1.2.0"]
+
+
+def test_unique_versions_empty() -> None:
+    assert unique_versions([]) == []

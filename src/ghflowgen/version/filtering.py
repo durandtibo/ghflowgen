@@ -8,6 +8,7 @@ __all__ = [
     "filter_valid_versions",
     "latest_major_versions",
     "latest_minor_versions",
+    "unique_versions",
 ]
 
 from contextlib import suppress
@@ -194,7 +195,6 @@ def latest_minor_versions(versions: Sequence[str]) -> list[str]:
         A list containing the latest version for each minor version,
             sorted by major and minor version numbers.
 
-
     Example usage:
 
     ```pycon
@@ -214,3 +214,33 @@ def latest_minor_versions(versions: Sequence[str]) -> list[str]:
         if current is None or v > current:
             by_minor[key] = v
     return [str(by_minor[k]) for k in sorted(by_minor)]
+
+
+def unique_versions(versions: Sequence[str]) -> list[str]:
+    """Return a list of unique versions while preserving order.
+
+    Args:
+        versions: A list of version strings.
+
+    Returns:
+        A list containing only unique version strings, preserving the
+            original order of first occurrence.
+
+    Example usage:
+
+    ```pycon
+
+    >>> from ghflowgen.version import latest_major_versions
+    >>> versions = unique_versions(["1.0.0", "1.0.1", "1.0.0", "1.2.0"])
+    >>> versions
+    ['1.0.0', '1.0.1', '1.2.0']
+
+    ```
+    """
+    seen = set()
+    unique = []
+    for v in versions:
+        if v not in seen:
+            seen.add(v)
+            unique.append(v)
+    return unique
