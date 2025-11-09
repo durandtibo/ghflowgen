@@ -2,21 +2,11 @@ from __future__ import annotations
 
 from unittest.mock import Mock, patch
 
-import pytest
-
 from ghflowgen.version import (
     get_latest_major_versions,
     get_latest_minor_versions,
     get_versions,
 )
-
-
-@pytest.fixture(autouse=True)
-def _reset_cache() -> None:
-    get_versions.cache_clear()
-    get_latest_major_versions.cache_clear()
-    get_latest_minor_versions.cache_clear()
-
 
 ##################################
 #     Tests for get_versions     #
