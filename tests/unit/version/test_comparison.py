@@ -44,9 +44,9 @@ def test_sort_versions_descending() -> None:
     ]
 
 
-def test_sort_versions_empty() -> None:
-    assert sort_versions([]) == []
-
-
 def test_sort_versions_single_item() -> None:
     assert sort_versions(["2.0.0"]) == ["2.0.0"]
+
+
+def test_sort_versions_empty() -> None:
+    assert sort_versions([]) == []

@@ -230,17 +230,11 @@ def unique_versions(versions: Sequence[str]) -> list[str]:
 
     ```pycon
 
-    >>> from ghflowgen.version import latest_major_versions
-    >>> versions = unique_versions(["1.0.0", "1.0.1", "1.0.0", "1.2.0"])
+    >>> from ghflowgen.version import latest_major_versions, sort_versions
+    >>> versions = sort_versions(unique_versions(["1.0.0", "1.0.1", "1.0.0", "1.2.0"]))
     >>> versions
     ['1.0.0', '1.0.1', '1.2.0']
 
     ```
     """
-    seen = set()
-    unique = []
-    for v in versions:
-        if v not in seen:
-            seen.add(v)
-            unique.append(v)
-    return unique
+    return list(set(versions))
