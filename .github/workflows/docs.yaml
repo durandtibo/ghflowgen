@@ -3,7 +3,7 @@ on:
   workflow_call:
   workflow_dispatch:  # to trigger manually
   push:
-    branches:
+    tags:
       - "v*.*.*"
 
 permissions:
